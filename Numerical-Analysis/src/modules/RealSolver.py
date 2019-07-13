@@ -53,8 +53,8 @@ class RealSolver:
         
 
         # Begin the Root Finding Procedure
-        self.realMethods = [self.newtonRaphson, self.bisection]
-        self.opLog.append('Initialization Succesful')
+        self.realMethods = [self.newtonRaphson, self.onePointIteration, self.bisection]
+        self.opLog.append('Initialization Succesful\n')
         
     
     '''
@@ -84,16 +84,20 @@ class RealSolver:
             methodList = self.realMethods
         
         for method in methodList:
+            
+            name = method.__name__
+            self.opLog.append(name + ' started')
+            
             potentialRoot = method()
-            self.rootLog[method.__name__] = potentialRoot
+            self.rootLog[name] = potentialRoot
             
             if not potentialRoot is None:
-                if self.verifyRoot(potentialRoot):
+                if self.verifyRoot(potentialRoot, name):
                     self.root = potentialRoot
-                    break
+                    #break
             
             else:
-                self.opLog.append('Procedure "' + method.__name__ + '" Halted')
+                self.opLog.append(name+ ' halted\n')
 
                     
                     
@@ -107,23 +111,23 @@ class RealSolver:
     <input>self</input>
     <output>bool</output>
     '''              
-    def verifyRoot(self, potentialRoot):
+    def verifyRoot(self, potentialRoot, name):
         
         isVerified = False
 
         try:
             if abs(self.f(potentialRoot)) <= const.maxError:
-                self.opLog.append('Solution Verified')
+                self.opLog.append(name + ' verified\n')
                 isVerified = True
             else:
-                self.opLog.append('Algorithm Converged to Incorrect Value')
+                self.opLog.append(name + ' converged to incorrect value\n')
                 
         except ValueError:
-            self.opLog.append('Algorithm Returned an Undefined Value')
+            self.opLog.append(name + ' returned an undefined value\n')
             
         except TypeError:
             if self.root is None:
-                self.opLog.append('Root not Updated in Meta Data')
+                self.opLog.append('root not updated in meta data\n')
             
         return isVerified
         
@@ -175,12 +179,12 @@ class RealSolver:
                     break
                 
             except (ValueError, ZeroDivisionError):
-                self.opLog.append('Invalid Function Evaluation in Newtons Method')
+                self.opLog.append('invalid function evaluation')
                 return None
 
             count += 1
 
-        self.opLog.append('Newtons Method Converged at ' + str(root))
+        self.opLog.append('converged at ' + str(root))
         return root
 
 
@@ -196,7 +200,7 @@ class RealSolver:
         
         # Do not execute without a second guess
         if not self.isBracketed:
-            self.opLog.append('Closed Method not Attempted without Second Guess')
+            self.opLog.append('closed method not attempted')
             return None
 
         count = 0                                    # Count Iterations
@@ -213,7 +217,7 @@ class RealSolver:
                 signCheck = self.f(root) * self.f(lowerBound)
 
             except (ValueError, ZeroDivisionError):
-                self.opLog.append('Invalid Function Evaluation in Bisection Method')
+                self.opLog.append('invalid function evaluation')
                 return None
 
             # Check where this value lands. If the root is not found, check the sign of the
@@ -229,12 +233,54 @@ class RealSolver:
                         upperBound = root
 
             except (ValueError, ZeroDivisionError):
-                self.opLog.append('Invalid Function Evaluation in Bisection Method')
+                self.opLog.append('invalid function evaluation')
                 return None
 
             count += 1
 
-        self.opLog.append('Bisection Method Halted with root = ' + str(root))
+        self.opLog.append('converged at ' + str(root))
+        return root
+
+
+    '''
+    <name>onePointIteration</name>
+    <summary>
+    Transform the root equation into iterator form:
+        0 = f(x)  -->  x = g(x)
+    Then iterate with the transformed equation:
+        X(i+1) = g(X(i))
+    </summary>
+    <input>self</input>
+    <output>None</output>
+    '''
+    def onePointIteration(self):
+        
+        count = 0                                    # Count Iterations
+        root = self.firstGuess                       # Store the result
+        actualError = 10 * const.maxError            # Error when comparing iteratons
+        
+        while actualError > const.maxError and count < const.maxIterations:
+            
+            # Store the last root.
+            lastRoot = root
+            
+            # Add the old estimate to each side of the function to find a new estimate.
+            try:
+                root = self.f(lastRoot) + lastRoot
+            
+            except (ValueError, ZeroDivisionError):
+                self.opLog.append('invalid function evaluation')
+                return None
+            
+            except OverflowError:
+                self.opLog.append('overflow')
+                return None
+            
+            actualError = abs((lastRoot - root)/root)
+            
+            count += 1
+
+        self.opLog.append('One Point Iteration Converged at ' + str(root))
         return root
 
 
@@ -261,3 +307,13 @@ class RealSolver:
             thisStr += '\t' + key + ': ' + str(value) + '\n'
             
         return thisStr
+    
+    # docstring
+    '''
+    <name></name>
+    <summary>
+    
+    </summary>
+    <input></input>
+    <output></output>
+    '''
