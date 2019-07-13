@@ -13,7 +13,7 @@ import ComplexSolver
 # Initialize Testing Functions
 
 def f1(x):
-    # Root: 3.141592653589793
+    # Root: 0, 3.141592653589793, etc.
     return sin(x)
 
 def f2(x):
@@ -57,7 +57,7 @@ def main():
 #    print()
 
 
-    test = RealSolver.RealSolver(f1, 1)
+    test = RealSolver.RealSolver(f2, 1, 4)
     test.findRoot()
     print(test.toString())
     
@@ -65,4 +65,14 @@ def main():
     return None
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as error:
+        print("\nUnhandled Exception: ")
+        print(str(error.__class__))
+        print(str(error))
+        
+        
+        
+        
+        
