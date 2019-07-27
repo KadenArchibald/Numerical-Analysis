@@ -3,11 +3,12 @@ Driver for Numerical Method Module Testing
 '''
 
 from math import pi, sin, sqrt, log
+import datetime
 
 
 import RealSolver
 import ComplexSolver
-#import Integrator
+import Integrator
 #import Differentiator
 
 # Initialize Testing Functions
@@ -35,21 +36,32 @@ def f5(x):
 
 def main():
     
-#    # Root Finding
-#    print('Root Finding')
-#    print('Test 1:', RealSolver.realSolver(f1, 1))
-#    print('Test 2:', RealSolver.realSolver(f2, 10))
-#    print('Test 3:', RealSolver.realSolver(f3, -2, 2))
-#    print('Test 4:', RealSolver.realSolver(f4, 1))
-#    print()
+    # Initialize log
+    try:
+        logFile = open('log.txt', 'w')
+    except FileNotFoundError:
+        logFile = open('log.txt', 'x')
+    finally:
+        logFile.write('Test Log for Numerical-Analysis \n')
+        logFile.write(str(datetime.datetime.now()) + '\n')
     
-#    # Integration
-#    print('Integration')
-#    print('Test 1:', Integrator.integrate(f1, 0, pi/4))
-#    print('Test 2:', Integrator.integrate(f2, 0, 0.8))
-#    print('Test 3:', Integrator.integrate(f3, 1, 10))
-#    print('Test 4:', Integrator.integrate(f4, 10, 20))
-#    print()
+    
+    
+    # Root Finding
+    print('Root Finding')
+    print('Test 1:', RealSolver.realSolver(f1, 1))
+    print('Test 2:', RealSolver.realSolver(f2, 10))
+    print('Test 3:', RealSolver.realSolver(f3, -2, 2))
+    print('Test 4:', RealSolver.realSolver(f4, 1))
+    print()
+    
+    # Integration
+    print('Integration')
+    print('Test 1:', Integrator.integrator(f1, 0, pi/4))
+    print('Test 2:', Integrator.integrator(f2, 0, 0.8))
+    print('Test 3:', Integrator.integrator(f3, 1, 10))
+    print('Test 4:', Integrator.integrator(f4, 10, 20))
+    print()
 #    
 #    # Differentiation
 #    print('Differentiation')
@@ -60,9 +72,9 @@ def main():
 #    print()
 
 
-    test = ComplexSolver.ComplexSolver(f5, 2)
-    test.findRoot()
-    print(test.toString())
+    temp = Integrator.Integrator(f1, 0, pi)
+    temp.findIntegral()
+    print(temp.toString())
     
     
     
@@ -77,4 +89,4 @@ if __name__ == '__main__':
 #        print(str(error.__class__))
 #        print(str(error))
         
-        
+# https://stackoverflow.com/questions/14168677/merge-development-branch-with-master

@@ -294,14 +294,13 @@ class RealSolver:
     '''
     def toString(self):
         
-        thisStr = 'Function: ' + self.f.__name__ + '\n'
+        thisStr = ''
         
+        thisStr += 'Function: ' + self.f.__name__ + '\n'
         thisStr += 'Root: ' + str(self.root) + '\n'
-        
         thisStr += 'Operation Log: \n'
         for item in self.opLog:
             thisStr += '\t' + item + '\n'
-            
         thisStr += 'Root Log: \n'
         for (key, value) in self.rootLog.items():
             thisStr += '\t' + key + ': ' + str(value) + '\n'
