@@ -2,7 +2,7 @@
 Kaden Archibald
 
 Created: Oct 11, 2018
-Revised: Jun 29, 2019
+Revised: Jul 13, 2019
 Version: IPython 7.2.0 (Anaconda distribution) with Python 3.7.1
 
 Module for numerically solving arbitrary real-valued
@@ -70,7 +70,7 @@ class RealSolver:
     usually converge, so all alogrithms failing will usually mean that the
     function has no real roots.
     </summary>
-    <input>self</input>
+    <input>self, list</input>
     <output>None</output>
     '''
     def findRoot(self, methodList = []):
@@ -97,7 +97,7 @@ class RealSolver:
                     #break
             
             else:
-                self.opLog.append(name+ ' halted\n')
+                self.opLog.append(name + ' halted\n')
 
                     
                     
@@ -108,7 +108,7 @@ class RealSolver:
     algorithms can converge to incorrect values, especially if the initial guess was an optima
     or endpoint of a funciton.
     </summary>
-    <input>self</input>
+    <input>self, double, str</input>
     <output>bool</output>
     '''              
     def verifyRoot(self, potentialRoot, name):

@@ -28,17 +28,20 @@ def f4(x):
     # Root: 1.0
     return log(x, 2)
 
+def f5(x):
+    # Root: +j & -j
+    return x**2 + 1
 
 
 def main():
     
-    # Root Finding
-    print('Root Finding')
-    print('Test 1:', RealSolver.realSolver(f1, 1))
-    print('Test 2:', RealSolver.realSolver(f2, 10))
-    print('Test 3:', RealSolver.realSolver(f3, -2, 2))
-    print('Test 4:', RealSolver.realSolver(f4, 1))
-    print()
+#    # Root Finding
+#    print('Root Finding')
+#    print('Test 1:', RealSolver.realSolver(f1, 1))
+#    print('Test 2:', RealSolver.realSolver(f2, 10))
+#    print('Test 3:', RealSolver.realSolver(f3, -2, 2))
+#    print('Test 4:', RealSolver.realSolver(f4, 1))
+#    print()
     
 #    # Integration
 #    print('Integration')
@@ -57,22 +60,21 @@ def main():
 #    print()
 
 
-    test = RealSolver.RealSolver(f2, 1, 4)
+    test = ComplexSolver.ComplexSolver(f5, 2)
     test.findRoot()
     print(test.toString())
+    
     
     
     return None
 
 if __name__ == '__main__':
-    try:
-        main()
-    except Exception as error:
-        print("\nUnhandled Exception: ")
-        print(str(error.__class__))
-        print(str(error))
-        
-        
-        
+    main()
+#    try:
+#        main()
+#    except Exception as error:
+#        print("\nUnhandled Exception: ")
+#        print(str(error.__class__))
+#        print(str(error))
         
         
