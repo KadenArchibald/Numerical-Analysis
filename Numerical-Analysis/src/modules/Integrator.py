@@ -9,18 +9,18 @@ Module for numerically solving arbitrary real-valued
 functions in a single vairable.
 '''
 
-def integrator(integrand, lowerBound, upperBound, evenStepSize = True, delta = None):
+def integrator(integrand, lowerBound, upperBound, delta = None):
     ''' 
     Driver function to hide object instantiation from end programmer.
     '''
     
-    integral = Integrator(integrand, lowerBound, upperBound, evenStepSize, delta)
+    integral = Integrator(integrand, lowerBound, upperBound, delta)
     integral.findIntegral()
     return integral.area
 
 
 class Integrator:
-    def __init__(self, integrand, lowerBound, upperBound, evenStepSize = True, delta = None):
+    def __init__(self, integrand, lowerBound, upperBound, delta = None):
         
         # General Data
         self.f = integrand
@@ -36,7 +36,6 @@ class Integrator:
             self.partition = delta
         self.maxError = 10e-3
         
-        self.evenStepSize = evenStepSize       # If false, a changing deltaX must be accounted for.
         self.willVerify = True                 # If true, apply more than one integration algorithm.
         self.opLog = []                        # Operation log.
         
@@ -170,8 +169,6 @@ class Integrator:
         #self.area = result
         self.opLog.append('trapezoidal rule returned with area: ' + str(result))
         return result
-
-
 
 
     def toString(self):
