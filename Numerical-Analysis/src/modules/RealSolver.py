@@ -10,6 +10,8 @@ functions in a single vairable.
 '''
 
 import const
+#import data
+
 
 ''' Driver function to hide object intialization from end programmer. '''
 def realSolver(function, firstGuess, secondGuess = None, fPrime = None):
@@ -22,14 +24,10 @@ def realSolver(function, firstGuess, secondGuess = None, fPrime = None):
 class RealSolver:
     
     '''
-    <summary>
     Create an object that contains a function to be solved, one (or two) initial
     guesses, a function for the derivative, auxiliary precalculated arguements for a function,
     and data about the root solving problem itself: a maximum error, a maximum number of
     iterations, and a string array to log major operations.
-    </summary>
-    <input>self, function, firstGuess, secondGuess, fPrime</input>
-    <output>None</output>
     '''
     def __init__(self, function, firstGuess, secondGuess = None, fPrime = None):
 
@@ -58,7 +56,6 @@ class RealSolver:
         
     
     '''
-    <summary>
     Apply the first root finding algorithm and then reevaluate the function at the
     returned root. If the functions returns (close enough to) zero, terminate the
     loop and return that value.
@@ -69,11 +66,8 @@ class RealSolver:
     For general functions, algorithms such as Newton's Method and the Bisection Method
     usually converge, so all alogrithms failing will usually mean that the
     function has no real roots.
-    </summary>
-    <input>self, list</input>
-    <output>None</output>
     '''
-    def findRoot(self, methodList = []):
+    def findRoot(self, methodList = []) -> None:
         
         # Every algorithm will return an estimate of the root.
         # Keep a dictionary of which method returned which estimate.
@@ -98,20 +92,18 @@ class RealSolver:
             
             else:
                 self.opLog.append(name + ' halted\n')
+                
+        #data.writeStr(self.opLog)
 
                     
                     
     '''
-    <summary>
     Verify that a root really is zero before terminating. This method ensures that no number
     that is not actually a root will ever be returned. This is valuable becuase some
     algorithms can converge to incorrect values, especially if the initial guess was an optima
     or endpoint of a funciton.
-    </summary>
-    <input>self, double, str</input>
-    <output>bool</output>
     '''              
-    def verifyRoot(self, potentialRoot, name):
+    def verifyRoot(self, potentialRoot: float, name: str) -> bool:
         
         isVerified = False
 
@@ -134,18 +126,13 @@ class RealSolver:
 
     
     '''
-    <name>newtonRaphson</name>
-    <summary>
     Employ Newton's Method of numerically converging on a root using
     a function's derivative:
         X(i+1) = X(i) - f(X(i))/g(X(i))
     Where f is the target function, g is that function's derivative, and i
     is the current iteration.
-    </summary>
-    <input>self</input>
-    <output>bool</output>
     '''
-    def newtonRaphson(self):
+    def newtonRaphson(self) -> float:
         
         count = 0                                    # Count Iterations
         root = self.firstGuess                       # Store the result
@@ -189,14 +176,9 @@ class RealSolver:
 
 
     '''
-    <name>bisection</name>
-    <summary>
     Starting with two initial guesses, conduct a binary search.
-    </summary>
-    <input>self</input>
-    <output>double</output>
     '''
-    def bisection(self):
+    def bisection(self) -> float:
         
         # Do not execute without a second guess
         if not self.isBracketed:
@@ -243,17 +225,12 @@ class RealSolver:
 
 
     '''
-    <name>onePointIteration</name>
-    <summary>
     Transform the root equation into iterator form:
         0 = f(x)  -->  x = g(x)
     Then iterate with the transformed equation:
         X(i+1) = g(X(i))
-    </summary>
-    <input>self</input>
-    <output>None</output>
     '''
-    def onePointIteration(self):
+    def onePointIteration(self) -> float:
         
         count = 0                                    # Count Iterations
         root = self.firstGuess                       # Store the result
@@ -285,14 +262,9 @@ class RealSolver:
 
 
     '''
-    <name>toString</name>
-    <summary>
     Return a string representation of the object.
-    </summary>
-    <input>self</input>
-    <output>str</output>
     '''
-    def toString(self):
+    def toString(self) -> str:
         
         thisStr = ''
         
@@ -307,12 +279,4 @@ class RealSolver:
             
         return thisStr
     
-    # docstring
-    '''
-    <name></name>
-    <summary>
-    
-    </summary>
-    <input></input>
-    <output></output>
-    '''
+
