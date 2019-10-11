@@ -11,6 +11,7 @@ functions in a single vairable.
 
 import const
 #import data
+#import Log
 
 
 ''' Driver function to hide object intialization from end programmer. '''

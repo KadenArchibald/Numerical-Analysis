@@ -82,11 +82,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-#    try:
-#        main()
-#    except Exception as error:
-#        print("\nUnhandled Exception: ")
-#        print(str(error.__class__))
-#        print(str(error))
-        
-# https://stackoverflow.com/questions/14168677/merge-development-branch-with-master
+

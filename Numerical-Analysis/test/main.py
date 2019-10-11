@@ -24,7 +24,7 @@ import Integrator
 
 # Other
 import data
-
+from Log import Log
 
 # Initialize Testing Functions
 
@@ -51,15 +51,10 @@ def f5(x):
 
 def main():
     
-    # Initialize log
-    try:
-        logFile = open('log.txt', 'w')
-    except FileNotFoundError:
-        logFile = open('log.txt', 'x')
-    finally:
-        logFile.write('Test Log for Numerical-Analysis \n')
-        logFile.write(str(datetime.datetime.now()) + '\n')
+    testResultsFileName = 'TestRun' + str(datetime.datetime.now()) + '.log'
     
+    temp = Log(testResultsFileName, 'w')
+    temp.writeStr('I work')
     
     
     # Root Finding
@@ -97,11 +92,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-#    try:
-#        main()
-#    except Exception as error:
-#        print("\nUnhandled Exception: ")
-#        print(str(error.__class__))
-#        print(str(error))
-        
-# https://stackoverflow.com/questions/14168677/merge-development-branch-with-master
+
