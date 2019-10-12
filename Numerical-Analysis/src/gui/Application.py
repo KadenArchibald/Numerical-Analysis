@@ -85,9 +85,9 @@ class Application:
         self.axes = plt.subplot()
         
         # Formatting
-        self.axes.set_title('X and Y Position Relative to Starting Point')
-        self.axes.set_xlabel('meters')
-        self.axes.set_ylabel('meters')
+        self.axes.set_title('f(x)')
+        self.axes.set_xlabel('x')
+        self.axes.set_ylabel('y')
         
         # Embed in tkinter GUI
         self.fig.canvas = FigureCanvasTkAgg(self.fig, master = location)
