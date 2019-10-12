@@ -1,7 +1,7 @@
 '''
 Kaden Archibald
 Created: Jun 30, 2019
-Revised: , 2019
+Revised: Oct 12, 2019
 Version: IPython 7.2.0 (Anaconda distribution) with Python 3.7.1
 
 Module for numerically solving arbitrary complex-valued
@@ -32,7 +32,7 @@ class ComplexSolver(RealSolver):
         self.conjugate = None
         
     
-    def findRoot(self, methodList = []):
+    def findRoot(self, methodList = []) -> None:
         
         if not methodList:
             methodList = self.complexMethods
@@ -43,13 +43,10 @@ class ComplexSolver(RealSolver):
         
         
     '''
-    <name>muller</name>
-    <summary>
     Interpolate points using a parabola, selecting the new points such that they 
     converge on the root. 
-    </summary>
     '''
-    def muller(self):
+    def muller(self) -> float:
         
         count = 0                                    # Count Iterations            
         actualError = 10 * const.maxError            # Error when comparing iteratons

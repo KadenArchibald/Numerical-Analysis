@@ -3,6 +3,7 @@ Driver for Numerical Method Module Testing
 '''
 
 from math import pi, sin, sqrt, log
+
 import datetime
 import time
 

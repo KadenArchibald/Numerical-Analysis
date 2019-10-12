@@ -38,17 +38,14 @@ class Integrator:
         
         self.willVerify = True                 # If true, apply more than one integration algorithm.
         self.opLog = []                        # Operation log.
+        self.areaLog = {}                      # Results from each algorithm will be logged and compared for verification. 
         
         
-        
-    def findIntegral(self):
-        # Apply each method included in the algorithm. Results from each algorithm will be logged and
-        # compared for verification. 
+    def findIntegral(self) -> None:
+        # Apply each method included in the algorithm. 
         integratingMethods = [self.simpsonsRule, self.trapezoidalRule]
-        self.areaLog = {}
         
         for method in integratingMethods:
-            # If the method succeeded, write the area to memory; else, write None. 
             # Keep track of which method did what.
             self.areaLog[method.__name__] = method()
         
@@ -68,7 +65,7 @@ class Integrator:
         
                 
             
-    def verifyIntegral(self):
+    def verifyIntegral(self) -> bool:
         # Begin verification
         results = []
         isConsistent = True
@@ -94,7 +91,7 @@ class Integrator:
     Apply Simpson's Multi-application 1/3 Rule. Simpson's Rule involves approximating the
     area under the curve using a second order Lagrange polynomial. 
     '''
-    def simpsonsRule(self):
+    def simpsonsRule(self) -> float:
 
         
         # Make sure step size is even. If not, make it even.
@@ -140,7 +137,7 @@ class Integrator:
     Apply the multi-application trapezoidal rule. This algorithm will break the area 
     into 'self.partition' number of trapezoids, then sum the area of each trapezoid.
     '''      
-    def trapezoidalRule(self):
+    def trapezoidalRule(self) -> float:
 
         
         # Initialize step size
