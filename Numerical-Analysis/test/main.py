@@ -4,17 +4,18 @@ Driver for Numerical Method Module Testing
 
 from math import pi, sin, sqrt, log
 import datetime
+import time
 
 
 # Update the system path to find the library and source files
 import sys, os
 
-relativeDirs = ['\\..\\lib', '\\..\\src\\modules']
-for thisDir in relativeDirs:
-    absoluteDir = os.getcwd() + thisDir
+relPaths = ['\\Numerical-Analysis\\lib', '\\Numerical-Analysis\\src\\modules']
+for path in relPaths:
+    absPath = os.getcwd() + path
     
-    if not absoluteDir in sys.path:
-        sys.path.append(absoluteDir)
+    if not absPath in sys.path:
+        sys.path.append(absPath)
 
 # Modules
 import RealSolver
@@ -51,7 +52,7 @@ def f5(x):
 
 def main():
     
-    testResultsFileName = 'TestRun' + str(datetime.datetime.now()) + '.log'
+    testResultsFileName = 'TestRun.log'
     
     temp = Log(testResultsFileName, 'w')
     temp.writeStr('I work')
@@ -82,8 +83,8 @@ def main():
 #    print()
 
 
-    temp = Integrator.Integrator(f1, 0, pi)
-    temp.findIntegral()
+    temp = RealSolver.RealSolver(f1, 1)
+    temp.findRoot()
     print(temp.toString())
     
     

@@ -18,7 +18,7 @@ class Log:
             self.fd = open(self.fileName, 'x')
             
         finally:
-            self.fd.write('Log Initialized')
+            self.fd.write('Log Initialized\n')
             self.fd.write(str(datetime.datetime.now()) + '\n')
     
 

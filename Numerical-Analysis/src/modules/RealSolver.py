@@ -2,7 +2,7 @@
 Kaden Archibald
 
 Created: Oct 11, 2018
-Revised: Jul 13, 2019
+Revised: Oct 12, 2019
 Version: IPython 7.2.0 (Anaconda distribution) with Python 3.7.1
 
 Module for numerically solving arbitrary real-valued
@@ -49,6 +49,8 @@ class RealSolver:
         self.root = None                            # Store the final result
         self.isCorrect = False                      # True if the root if verified to be correct
         self.opLog = []                             # Log major operations of the algorithm
+        self.rootLog = {}                           # Keep a dictionary of which method returned which estimate.
+        
         
 
         # Begin the Root Finding Procedure
@@ -69,10 +71,6 @@ class RealSolver:
     function has no real roots.
     '''
     def findRoot(self, methodList = []) -> None:
-        
-        # Every algorithm will return an estimate of the root.
-        # Keep a dictionary of which method returned which estimate.
-        self.rootLog = {}
         
         # Find the root from every method
         if not methodList:
